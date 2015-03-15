@@ -7,6 +7,7 @@ knitr::opts_chunk$set(cache=FALSE)
 title: 'Reproducible Research: Peer Assessment 1'
 output:
   html_document:
+    fig_caption: yes
     keep_md: yes
 ---
 
@@ -75,7 +76,7 @@ head(my_totalStepsByDay)
 
 
 ### 2.Make a histogram of the total number of steps taken each day
-```{r 'Histogram of the total number of steps taken each day', fig.width = 6, fig.height = 6, fig.path="./figure/"  }
+```{r 'Histogram of the total number of steps taken each day' }
 # Plot an histogram where days are presented in x-axis  
 # and the total number of steps by day are presented in the y-axis 
 
@@ -104,7 +105,7 @@ head(my_medianDataFrameByDay)
 ### 1.Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 
-```{r 'time-series graph with The average number of steps taken', fig.width = 6, fig.height = 6 , fig.path="./figure/"}
+```{r 'time-series graph with The average number of steps taken' }
 # x-axis - the 5-minute interval
 # y-axis - the average number of steps taken, averaged across all days
 
@@ -191,7 +192,7 @@ my_newTotalStepsSplittedByDay <- sapply(my_newStepsSplittedByDay, sum)
 
 ### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-```{r 'Plots of data with and without missing values', fig.width = 6, fig.height = 6 , fig.path="./figure/"}
+```{r 'Plots of data with and without missing values'}
 
 # Plotting an histogram where days are presented in the x-axis 
 # and the total daily number of steps are presented in the y-axis
@@ -263,7 +264,7 @@ my_newWeekendsData <- my_newData[my_newData$typeOfDay == "Weekends", ]
 
 ****************
 
-```{r 'Plotting average of steps by interval for weekdays and for weekends', fig.width = 8, fig.height = 8, fig.path="./figure/" }
+```{r 'Plotting average of steps by interval for weekdays and for weekends' }
 # Further split up the Weekdays and Weekends into their own intervals
 myDataForWeekdaysSplittedByInterval <- split(my_newWeekdaysData$steps, my_newWeekdaysData$interval)
 myDataForWeekendsSplittedByInterval <- split(my_newWeekendsData$steps, my_newWeekendsData$interval)
