@@ -311,7 +311,7 @@ my_naCount
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+We create replicated column for mean values and we use it to replace columns with NAs values 
 
 
 ```r
@@ -18151,5 +18151,8 @@ lwd=2, col="blue")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+
+
+
 
 
