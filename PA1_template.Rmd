@@ -5,10 +5,9 @@
 title: 'Reproducible Research: Peer Assessment 1'
 output:
   html_document:
-    fig_caption: yes
     keep_md: yes
-    self_contained: yes
-  pdf_document: default
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 
@@ -155,7 +154,7 @@ my_naCount
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+We create replicated column for mean values and we use it to replace columns with NAs values 
 
 ```{r }
 # Replace NaN values with 0.  
