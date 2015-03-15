@@ -70,13 +70,13 @@ my_stepsSplittedByDay <- split(my_data$steps, my_dates$yday)
 
 # Calculate and show Total number of steps of each day
 my_totalStepsByDay <- sapply(my_stepsSplittedByDay, sum, na.rm=TRUE)
-head(my_totalStepsByDay) 
+my_totalStepsByDay
 ```
 
 
 
 ### 2.Make a histogram of the total number of steps taken each day
-```{r   }
+```{r  , fig.width=7, fig.height=7 }
 # Plot an histogram where days are presented in x-axis  
 # and the total number of steps by day are presented in the y-axis 
 
@@ -90,14 +90,14 @@ plot(my_uniqueDates, my_totalStepsByDay, main="Histogram of the total number of 
 ```{r  }
 my_meanStepsByDay <- sapply(my_stepsSplittedByDay, mean, na.rm=TRUE)
 my_meanDataFrameByDay <- data.frame(date=my_uniqueDates, meanStepsByDay=my_meanStepsByDay, row.names=NULL)
-head(my_meanDataFrameByDay)
+my_meanDataFrameByDay
 ```
 
 #### The median of the total number of steps taken per day are:
 ```{r  }
 my_medianStepsByDay <- sapply(my_stepsSplittedByDay, median, na.rm=TRUE)
 my_medianDataFrameByDay <- data.frame(date=my_uniqueDates, medianStepsByDay=my_medianStepsByDay, row.names=NULL)
-head(my_medianDataFrameByDay)
+my_medianDataFrameByDay
 ```
 
 ## What is the average daily activity pattern?
@@ -155,6 +155,8 @@ my_naCount
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
+BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+
 ```{r }
 # Replace NaN values with 0.  
 my_meanStepsByDay[is.nan(my_meanStepsByDay)] <- 0
@@ -179,7 +181,7 @@ my_Steps[my_originalStepswithNAs] <- my_replicatedMeanColumn[my_originalStepswit
 ```{r }
 my_newData <- my_data
 my_newData$steps <- my_Steps
-head(my_newData)
+my_newData
 
 
 # Splitting the new data frame for steps by day
@@ -192,17 +194,17 @@ my_newTotalStepsSplittedByDay <- sapply(my_newStepsSplittedByDay, sum)
 
 ### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-```{r  }
+```{r , fig.width=10, fig.height=10 }
 
 # Plotting an histogram where days are presented in the x-axis 
 # and the total daily number of steps are presented in the y-axis
 par(mfcol=c(2,1))
 
 # Plotting the original data without NAs
-plot(my_uniqueDates, my_totalStepsByDay, main="Histogram of steps taken each day before imputing NAs", 
+plot(my_uniqueDates, my_totalStepsByDay, main="Histogram of Total steps taken each day before imputing NAs", 
      xlab="Date (October and November, 2012)", ylab="Total daily number of steps", type="h", lwd=4, col="red")
 # Plot the modified data after imputing NAs
-plot(my_uniqueDates, my_newTotalStepsSplittedByDay, main="Histogram of steps taken each day after imputing NAs", 
+plot(my_uniqueDates, my_newTotalStepsSplittedByDay, main="Histogram of Total steps taken each day after imputing NAs", 
      xlab="Date (October and November, 2012)", ylab="Total daily number of steps", type="h", lwd=4, col="blue")
 ```
 
@@ -225,7 +227,7 @@ if we use median values, we have:
 my_newMedianStepsByDay <- sapply(my_newStepsSplittedByDay, median)
 my_newMedianDataFrame <- data.frame(date=my_uniqueDates, meanStepsByDay=my_medianStepsByDay, 
 newMedianStepsByDay=my_newMedianStepsByDay, row.names=NULL)
-head(my_newMedianDataFrame)
+my_newMedianDataFrame
 
 ```
 
@@ -263,7 +265,7 @@ my_newWeekendsData <- my_newData[my_newData$typeOfDay == "Weekends", ]
 
 
 
-```{r  }
+```{r , fig.width=10, fig.height=10  }
 # Further split up the Weekdays and Weekends into their own intervals
 myDataForWeekdaysSplittedByInterval <- split(my_newWeekdaysData$steps, my_newWeekdaysData$interval)
 myDataForWeekendsSplittedByInterval <- split(my_newWeekendsData$steps, my_newWeekendsData$interval)
