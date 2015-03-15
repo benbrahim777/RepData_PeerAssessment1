@@ -1,14 +1,12 @@
----
+﻿---
 title: "PA1_template"
-output:
-  html_document:
-    keep_md: yes
-    self_contained: no
-    smart: no
+author: "Montassar H'Daya"
+date: "March 13, 2015"
+output: html_document
 ---
 1.Load the data
 ```{r}
-
+setwd("~/R/5.Reproducible Research/repdata-data-activity")
 list.files()
 dat <- read.csv("activity.csv") # Read in data file
 ```
@@ -200,7 +198,7 @@ With the new data set we have just created, we are going to split up the data in
 ##Are there differences in activity patterns between weekdays and weekends?
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
 
-1.Create a new factor variable in the dataset with two levels â âweekdayâ and âweekendâ indicating whether a given date is a weekday or weekend day.
+1.Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 ```{r}
 # Part 5 - Now split up the data so that it's sorted by weekday or weekend
 # We have casted the dates to a POSIXlt class so wday is part of this class
@@ -255,5 +253,6 @@ xlab="Interval", ylab="Average # of steps across all weekends",
 lwd=2, col="blue")
 
 ```
+
 
 
