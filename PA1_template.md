@@ -1,11 +1,11 @@
-# Reproducible Research: Peer Assessment 1
+# Reproducible Research: Peer Assessment 1 [1]
 
 
 
 
 
 
-# Introduction [1]
+# Introduction
 
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
@@ -13,7 +13,7 @@ It is now possible to collect a large amount of data about personal movement usi
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 
-# Data [1]
+# Data
 
 The data for this assignment can be downloaded from the course web site:
 
@@ -32,13 +32,14 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 This section shows how to load and process data
 
 ### 1.Load the data
+We load data from "activity.csv"
 
 ```r
 my_data <- read.csv("activity.csv") # Read in data file
 ```
 
 ### 2.Process/transform the data
-
+We reformat dates in our data frame
 
 ```r
 # Dates are formatted as YYYY-MM-DD
@@ -56,6 +57,7 @@ my_uniqueIntervals <- unique(my_data$interval)
 For this part of the assignment, we ignore the missing values in the dataset.
 
 ### 1.Total number of steps taken per day
+We split data by day and we apply the sum function on each day. 
 
 
 ```r
@@ -86,6 +88,8 @@ my_totalStepsByDay
 
 ### 2.Make a histogram of the total number of steps taken each day
 
+We use an histogram to show the total steps for a day between October and november 2012.
+
 ```r
 # Plot an histogram where days are presented in x-axis  
 # and the total number of steps by day are presented in the y-axis 
@@ -98,7 +102,7 @@ plot(my_uniqueDates, my_totalStepsByDay, main="Histogram of the total number of 
 
 ### 3. Calculate and report the mean and median of the total number of steps taken per day
 
-#### The mean of the total number of steps taken per day are:
+#### The mean of the total number of steps taken per day are calculated using the mean function and these means are shown bellow :
 
 ```r
 my_meanStepsByDay <- sapply(my_stepsSplittedByDay, mean, na.rm=TRUE)
@@ -171,7 +175,7 @@ my_meanDataFrameByDay
 ## 61 2012-11-30            NaN
 ```
 
-#### The median of the total number of steps taken per day are:
+#### The median of the total number of steps taken per day are calculated using the median function and these medians are shown bellow :
 
 ```r
 my_medianStepsByDay <- sapply(my_stepsSplittedByDay, median, na.rm=TRUE)
@@ -281,12 +285,12 @@ abline(v=my_maxInterval, col="blue", lwd=3)
 ### 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```r
-result <- paste('Interval max is: ' , my_maxInterval)
+result <- paste('Interval max is: ' , my_maxInterval , " and it is indicated on red in the previous figure.")
 result
 ```
 
 ```
-## [1] "Interval max is:  835"
+## [1] "Interval max is:  835  and it is indicated on red in the previous figure."
 ```
 
  
@@ -311,7 +315,9 @@ my_naCount
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-We create replicated column for mean values and we use it to replace columns with NAs values 
+We replace NA values by o in our mean columns.
+Then, we fnd columns with NA values.
+Then, we create replicated columns for all mean values and we use them to replace columns found with NA values.   
 
 
 ```r
@@ -319,7 +325,7 @@ We create replicated column for mean values and we use it to replace columns wit
 my_meanStepsByDay[is.nan(my_meanStepsByDay)] <- 0
 
 # Now create a replicated column for mean values and use it to replace columns with NAs values
-my_replicatedMeanColumn <- rep(my_meanStepsByDay, length(my_stepsSplittedByinterval) - 1 )
+my_replicatedMeanColumn <- rep(my_meanStepsByDay, length(my_stepsSplittedByinterval)  )
 
 
 # The steps before replacement
@@ -17851,67 +17857,67 @@ my_newData
 ## 17505  35.3576389 2012-11-30     1840
 ## 17506  24.4687500 2012-11-30     1845
 ## 17507   0.0000000 2012-11-30     1850
-## 17508          NA 2012-11-30     1855
-## 17509          NA 2012-11-30     1900
-## 17510          NA 2012-11-30     1905
-## 17511          NA 2012-11-30     1910
-## 17512          NA 2012-11-30     1915
-## 17513          NA 2012-11-30     1920
-## 17514          NA 2012-11-30     1925
-## 17515          NA 2012-11-30     1930
-## 17516          NA 2012-11-30     1935
-## 17517          NA 2012-11-30     1940
-## 17518          NA 2012-11-30     1945
-## 17519          NA 2012-11-30     1950
-## 17520          NA 2012-11-30     1955
-## 17521          NA 2012-11-30     2000
-## 17522          NA 2012-11-30     2005
-## 17523          NA 2012-11-30     2010
-## 17524          NA 2012-11-30     2015
-## 17525          NA 2012-11-30     2020
-## 17526          NA 2012-11-30     2025
-## 17527          NA 2012-11-30     2030
-## 17528          NA 2012-11-30     2035
-## 17529          NA 2012-11-30     2040
-## 17530          NA 2012-11-30     2045
-## 17531          NA 2012-11-30     2050
-## 17532          NA 2012-11-30     2055
-## 17533          NA 2012-11-30     2100
-## 17534          NA 2012-11-30     2105
-## 17535          NA 2012-11-30     2110
-## 17536          NA 2012-11-30     2115
-## 17537          NA 2012-11-30     2120
-## 17538          NA 2012-11-30     2125
-## 17539          NA 2012-11-30     2130
-## 17540          NA 2012-11-30     2135
-## 17541          NA 2012-11-30     2140
-## 17542          NA 2012-11-30     2145
-## 17543          NA 2012-11-30     2150
-## 17544          NA 2012-11-30     2155
-## 17545          NA 2012-11-30     2200
-## 17546          NA 2012-11-30     2205
-## 17547          NA 2012-11-30     2210
-## 17548          NA 2012-11-30     2215
-## 17549          NA 2012-11-30     2220
-## 17550          NA 2012-11-30     2225
-## 17551          NA 2012-11-30     2230
-## 17552          NA 2012-11-30     2235
-## 17553          NA 2012-11-30     2240
-## 17554          NA 2012-11-30     2245
-## 17555          NA 2012-11-30     2250
-## 17556          NA 2012-11-30     2255
-## 17557          NA 2012-11-30     2300
-## 17558          NA 2012-11-30     2305
-## 17559          NA 2012-11-30     2310
-## 17560          NA 2012-11-30     2315
-## 17561          NA 2012-11-30     2320
-## 17562          NA 2012-11-30     2325
-## 17563          NA 2012-11-30     2330
-## 17564          NA 2012-11-30     2335
-## 17565          NA 2012-11-30     2340
-## 17566          NA 2012-11-30     2345
-## 17567          NA 2012-11-30     2350
-## 17568          NA 2012-11-30     2355
+## 17508   0.0000000 2012-11-30     1855
+## 17509   0.4375000 2012-11-30     1900
+## 17510  39.4166667 2012-11-30     1905
+## 17511  42.0694444 2012-11-30     1910
+## 17512  46.1597222 2012-11-30     1915
+## 17513  53.5416667 2012-11-30     1920
+## 17514  38.2465278 2012-11-30     1925
+## 17515   0.0000000 2012-11-30     1930
+## 17516  44.4826389 2012-11-30     1935
+## 17517  34.3750000 2012-11-30     1940
+## 17518  35.7777778 2012-11-30     1945
+## 17519  60.3541667 2012-11-30     1950
+## 17520  43.1458333 2012-11-30     1955
+## 17521  52.4236111 2012-11-30     2000
+## 17522  35.2048611 2012-11-30     2005
+## 17523  52.3750000 2012-11-30     2010
+## 17524  46.7083333 2012-11-30     2015
+## 17525  34.9166667 2012-11-30     2020
+## 17526  41.0729167 2012-11-30     2025
+## 17527  36.0937500 2012-11-30     2030
+## 17528  30.6284722 2012-11-30     2035
+## 17529  46.7361111 2012-11-30     2040
+## 17530  30.9652778 2012-11-30     2045
+## 17531  29.0104167 2012-11-30     2050
+## 17532   8.6527778 2012-11-30     2055
+## 17533  23.5347222 2012-11-30     2100
+## 17534  35.1354167 2012-11-30     2105
+## 17535  39.7847222 2012-11-30     2110
+## 17536  17.4236111 2012-11-30     2115
+## 17537  34.0937500 2012-11-30     2120
+## 17538  53.5208333 2012-11-30     2125
+## 17539   0.0000000 2012-11-30     2130
+## 17540  36.8055556 2012-11-30     2135
+## 17541  36.7048611 2012-11-30     2140
+## 17542   0.0000000 2012-11-30     2145
+## 17543  36.2465278 2012-11-30     2150
+## 17544  28.9375000 2012-11-30     2155
+## 17545  44.7326389 2012-11-30     2200
+## 17546  11.1770833 2012-11-30     2205
+## 17547   0.0000000 2012-11-30     2210
+## 17548   0.0000000 2012-11-30     2215
+## 17549  43.7777778 2012-11-30     2220
+## 17550  37.3784722 2012-11-30     2225
+## 17551  25.4722222 2012-11-30     2230
+## 17552   0.0000000 2012-11-30     2235
+## 17553   0.1423611 2012-11-30     2240
+## 17554  18.8923611 2012-11-30     2245
+## 17555  49.7881944 2012-11-30     2250
+## 17556  52.4652778 2012-11-30     2255
+## 17557  30.6979167 2012-11-30     2300
+## 17558  15.5277778 2012-11-30     2305
+## 17559  44.3993056 2012-11-30     2310
+## 17560  70.9270833 2012-11-30     2315
+## 17561  73.5902778 2012-11-30     2320
+## 17562  50.2708333 2012-11-30     2325
+## 17563  41.0902778 2012-11-30     2330
+## 17564  38.7569444 2012-11-30     2335
+## 17565  47.3819444 2012-11-30     2340
+## 17566  35.3576389 2012-11-30     2345
+## 17567  24.4687500 2012-11-30     2350
+## 17568   0.0000000 2012-11-30     2355
 ```
 
 ```r
@@ -17923,7 +17929,7 @@ my_newTotalStepsSplittedByDay <- sapply(my_newStepsSplittedByDay, sum)
 ```
 
 
-### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
 
 
 ```r
@@ -17942,6 +17948,7 @@ plot(my_uniqueDates, my_newTotalStepsSplittedByDay, main="Histogram of Total ste
 ![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
 
 
+#### With mean of the total number of steps taken per day, we have:
 
 
 ```r
@@ -18013,13 +18020,11 @@ my_newMeanDataFrame
 ## 58 2012-11-27     47.3819444        47.3819444
 ## 59 2012-11-28     35.3576389        35.3576389
 ## 60 2012-11-29     24.4687500        24.4687500
-## 61 2012-11-30      0.0000000                NA
+## 61 2012-11-30      0.0000000        32.2280213
 ```
 
 
-if we use median values, we have:
-
-
+#### With median of the total number of steps taken per day, we have:
 
 
 ```r
@@ -18091,14 +18096,19 @@ my_newMedianDataFrame
 ## 58 2012-11-27              0             0.00000
 ## 59 2012-11-28              0             0.00000
 ## 60 2012-11-29              0             0.00000
-## 61 2012-11-30             NA                  NA
+## 61 2012-11-30             NA            35.93576
 ```
+
+#### Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+Generally, even if we impute missing data, these median and median values did not changed. Only data for NA values have been modified . The other data without NAs have the same means and the same medians.
+
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-We use the dataset with the filled-in missing values for this part.
+We use the dataset with the filled-in missing values for this part, and we split it by days in two groups. The first group contains only weekdays and the second group contains only Sundays and Saturdays.
 
 
 ### 1.Create a new factor variable in the dataset with two levels for weekdays and for weekends indicating whether a given date is a weekday or weekend day.
@@ -18153,6 +18163,9 @@ lwd=2, col="blue")
 ![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
 
 
+### Differences in activity patterns between weekdays and weekends ?
 
+There is difference between activity in weekdays and weekends. As shown in the previous figure, there is more activities in weekends (see blue plot) than weekdays (see red plot).
 
-
+# References
+[1] this report is mainly based on the course contents.

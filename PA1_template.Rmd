@@ -2,17 +2,17 @@
 
 
 ---
-title: 'Reproducible Research: Peer Assessment 1'
+title: 'Reproducible Research: Peer Assessment 1 [1]'
 output:
-  html_document:
-    keep_md: yes
   pdf_document:
     latex_engine: xelatex
+  html_document:
+    keep_md: yes
 ---
 
 
 
-# Introduction [1]
+# Introduction
 
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
@@ -20,7 +20,7 @@ It is now possible to collect a large amount of data about personal movement usi
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 
-# Data [1]
+# Data
 
 The data for this assignment can be downloaded from the course web site:
 
@@ -39,12 +39,13 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 This section shows how to load and process data
 
 ### 1.Load the data
+We load data from "activity.csv"
 ```{r }
 my_data <- read.csv("activity.csv") # Read in data file
 ```
 
 ### 2.Process/transform the data
-
+We reformat dates in our data frame
 ```{r }
 # Dates are formatted as YYYY-MM-DD
 my_dates <- strptime(my_data$date, "%Y-%m-%d")
@@ -62,6 +63,7 @@ my_uniqueIntervals <- unique(my_data$interval)
 For this part of the assignment, we ignore the missing values in the dataset.
 
 ### 1.Total number of steps taken per day
+We split data by day and we apply the sum function on each day. 
 
 ```{r  }
 # Split the data frame by steps
@@ -75,6 +77,8 @@ my_totalStepsByDay
 
 
 ### 2.Make a histogram of the total number of steps taken each day
+
+We use an histogram to show the total steps for a day between October and november 2012.
 ```{r  , fig.width=7, fig.height=7 }
 # Plot an histogram where days are presented in x-axis  
 # and the total number of steps by day are presented in the y-axis 
@@ -85,14 +89,14 @@ plot(my_uniqueDates, my_totalStepsByDay, main="Histogram of the total number of 
 
 ### 3. Calculate and report the mean and median of the total number of steps taken per day
 
-#### The mean of the total number of steps taken per day are:
+#### The mean of the total number of steps taken per day are calculated using the mean function and these means are shown bellow :
 ```{r  }
 my_meanStepsByDay <- sapply(my_stepsSplittedByDay, mean, na.rm=TRUE)
 my_meanDataFrameByDay <- data.frame(date=my_uniqueDates, meanStepsByDay=my_meanStepsByDay, row.names=NULL)
 my_meanDataFrameByDay
 ```
 
-#### The median of the total number of steps taken per day are:
+#### The median of the total number of steps taken per day are calculated using the median function and these medians are shown bellow :
 ```{r  }
 my_medianStepsByDay <- sapply(my_stepsSplittedByDay, median, na.rm=TRUE)
 my_medianDataFrameByDay <- data.frame(date=my_uniqueDates, medianStepsByDay=my_medianStepsByDay, row.names=NULL)
@@ -133,7 +137,7 @@ abline(v=my_maxInterval, col="blue", lwd=3)
 
 ### 2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```{r }
-result <- paste('Interval max is: ' , my_maxInterval)
+result <- paste('Interval max is: ' , my_maxInterval , " and it is indicated on red in the previous figure.")
 result
 ```
 
@@ -154,14 +158,16 @@ my_naCount
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-We create replicated column for mean values and we use it to replace columns with NAs values 
+We replace NA values by o in our mean columns.
+Then, we fnd columns with NA values.
+Then, we create replicated columns for all mean values and we use them to replace columns found with NA values.   
 
 ```{r }
 # Replace NaN values with 0.  
 my_meanStepsByDay[is.nan(my_meanStepsByDay)] <- 0
 
 # Now create a replicated column for mean values and use it to replace columns with NAs values
-my_replicatedMeanColumn <- rep(my_meanStepsByDay, length(my_stepsSplittedByinterval) - 1 )
+my_replicatedMeanColumn <- rep(my_meanStepsByDay, length(my_stepsSplittedByinterval)  )
 
 
 # The steps before replacement
@@ -191,7 +197,7 @@ my_newTotalStepsSplittedByDay <- sapply(my_newStepsSplittedByDay, sum)
 ```
 
 
-### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+### 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
 
 ```{r , fig.width=10, fig.height=10 }
 
@@ -208,6 +214,7 @@ plot(my_uniqueDates, my_newTotalStepsSplittedByDay, main="Histogram of Total ste
 ```
 
 
+#### With mean of the total number of steps taken per day, we have:
 
 ```{r  }
 my_newMeanStepsByDay <- sapply(my_newStepsSplittedByDay, mean)
@@ -218,9 +225,7 @@ my_newMeanDataFrame
 ```
 
 
-if we use median values, we have:
-
-
+#### With median of the total number of steps taken per day, we have:
 
 ```{r }
 my_newMedianStepsByDay <- sapply(my_newStepsSplittedByDay, median)
@@ -230,11 +235,16 @@ my_newMedianDataFrame
 
 ```
 
+#### Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+Generally, even if we impute missing data, these median and median values did not changed. Only data for NA values have been modified . The other data without NAs have the same means and the same medians.
+
+
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-We use the dataset with the filled-in missing values for this part.
+We use the dataset with the filled-in missing values for this part, and we split it by days in two groups. The first group contains only weekdays and the second group contains only Sundays and Saturdays.
 
 
 ### 1.Create a new factor variable in the dataset with two levels for weekdays and for weekends€ indicating whether a given date is a weekday or weekend day.
@@ -286,3 +296,9 @@ lwd=2, col="blue")
 ```
 
 
+### Differences in activity patterns between weekdays and weekends ?
+
+There is difference between activity in weekdays and weekends. As shown in the previous figure, there is more activities in weekends (see blue plot) than weekdays (see red plot).
+
+# References
+[1] this report is mainly based on the course contents.
