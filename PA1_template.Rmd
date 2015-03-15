@@ -43,9 +43,6 @@ This section shows how to load and process data
 
 ### 1.Load the data
 ```{r 'Loading Data'}
-knitr::opts_chunk$set(cache=FALSE)
-
-setwd("C:/DropBox Salah/Coursera/DataScience/5 - Reproducible Research/PeerAssignment 1")
 my_data <- read.csv("activity.csv") # Read in data file
 ```
 
