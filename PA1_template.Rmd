@@ -4,10 +4,10 @@
 ---
 title: 'Reproducible Research: Peer Assessment 1 [1]'
 output:
-  pdf_document:
-    latex_engine: xelatex
   html_document:
     keep_md: yes
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 
